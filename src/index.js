@@ -10,6 +10,7 @@ state = {
   userTwo:"",
   userOneData:'',
   userTwoData:'',
+  searching:0,
 
 }
 // componentDidUpdate(){
@@ -22,17 +23,18 @@ state = {
   const url1 = `${API_BASE}/users/${username1}`;
   const url2 = `${API_BASE}/users/${username2}`;
 
-  getData(url1).then(d =>{
-    console.log(d);
+  getData(url1).then(d=>d.json()).then(d =>{
+    // console.log(d);
      this.setState( {userOneData:d} );
   });
-  getData(url2).then(d =>{
-    console.log(d);
+  getData(url2).then(d=>d.json()).then(d =>{
+    // console.log(d);
      this.setState( {userTwoData:d} );
   });
-
+  this.setState({searching:1})
 }
 render(){
+  console.log("main",this.state.searching);
   return(<div>
     <div className="inputs-container">
       <Input updateUser={(value) => this.setState({ userOne: value})}/>
@@ -40,9 +42,9 @@ render(){
       <Input updateUser={(value) => this.setState({ userTwo: value})} />
     </div>
     <div className="cards-container">
-    <PortfolioCard userdata={this.state.userOneData} />
+    <PortfolioCard done={this.state.searching} userdata={this.state.userOneData} />
     <img />
-     <PortfolioCard userdata={this.state.userTwoData}/>
+     <PortfolioCard done={this.state.searching} userdata={this.state.userTwoData}/>
     </div>
     </div>
 )}}
