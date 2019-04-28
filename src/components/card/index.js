@@ -5,8 +5,11 @@ import Statistics from "./userstatistics";
 
 
 class PortfolioCard extends React.Component {
-
+  // state={
+  //   find:this.props.find
+  // }
   render() {
+    console.log("portfolio",this.props.done);
   const {
     avatar_url,
     followers,
@@ -18,7 +21,7 @@ class PortfolioCard extends React.Component {
     return (
       <div>
         <GInfo url_pic = {avatar_url} name = {name}/>
-        <Statistics followers={followers}  reposCount={public_repos} reposUrl={repos_url}/>
+        <Statistics followers={followers} finish={this.props.done} reposCount={public_repos} reposUrl={repos_url}/>
       </div>
     );
   }
